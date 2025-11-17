@@ -462,6 +462,7 @@ download_kernel() {
 
             # Download the kernel to the storage directory
             i="1"
+            ${vb} = "stable"
             for kernel_var in "${down_kernel_list[@]}"; do
                 if [[ ! -d "${kernel_path}/${kernel_var}" ]]; then
                     kernel_down_from="https://github.com/${KERNEL_REPO_URL}/releases/download/kernel_${vb}/${kernel_var}.tar.gz"
