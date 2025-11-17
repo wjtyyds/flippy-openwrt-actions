@@ -49,7 +49,7 @@ PACKAGE_OPENWRT_6XY=("cm3" "e25" "photonicat" "r66s" "r68s" "rk3399")
 PACKAGE_SOC_VALUE="all"
 
 # Set the default packaged kernel download repository: https://github.com/breakingbadboy/OpenWrt/releases
-KERNEL_REPO_URL_VALUE="breakingbadboy/OpenWrt"
+KERNEL_REPO_URL_VALUE="wjtyyds/kernel"
 # Set kernel tag: kernel_stable, kernel_rk3588, kernel_rk35xx
 KERNEL_TAGS=("stable" "rk3588" "rk35xx")
 STABLE_KERNEL=("6.1.y" "6.12.y")
@@ -250,7 +250,7 @@ init_var() {
             KERNEL_TAGS_TMP+=("rk35xx")
         else
             # The stable kernel is used by default, and the flippy kernel is used with the ophub repository.
-            if [[ "${KERNEL_REPO_URL}" == "ophub/kernel" ]]; then
+            if [[ "${KERNEL_REPO_URL}" == "wjtyyds/kernel" ]]; then
                 KERNEL_TAGS_TMP+=("flippy")
             else
                 KERNEL_TAGS_TMP+=("stable")
@@ -513,7 +513,7 @@ make_openwrt() {
                 build_kernel=($(printf "%s\n" "${RK35XX_KERNEL[@]}" | grep -E "^$(IFS='|'; echo "${RK35XX_KERNEL_5XY[@]//.y/\\.}" | sed 's/ /|/g')"))
                 vb="rk35xx"
             else
-                if [[ "${KERNEL_REPO_URL}" == "ophub/kernel" ]]; then
+                if [[ "${KERNEL_REPO_URL}" == "wjtyyds/kernel" ]]; then
                     build_kernel=(${FLIPPY_KERNEL[@]})
                     vb="flippy"
                 else
