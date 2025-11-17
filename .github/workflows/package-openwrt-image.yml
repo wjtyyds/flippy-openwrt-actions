@@ -71,25 +71,20 @@ on:
       kernel_repo:
         description: "Set the kernel repository"
         required: false
-        default: "ophub/kernel"
+        default: "wjtyyds/kernel"
         type: choice
         options:
           - breakingbadboy/OpenWrt
-          - ophub/kernel
+          - wjtyyds/kernel
       openwrt_kernel:
         description: "Select kernel version"
         required: false
         default: "6.1.y_6.12.y"
         type: choice
         options:
-          - 5.4.y
-          - 5.10.y
-          - 5.15.y
           - 6.1.y
           - 6.6.y
           - 6.12.y
-          - 5.4.y_5.10.y
-          - 5.15.y_6.1.y
           - 6.1.y_6.12.y
           - 6.1.y_6.6.y
           - 6.6.y_6.12.y
@@ -117,12 +112,10 @@ on:
       builder_name:
         description: "Set OpenWrt builder signature."
         required: false
-        default: "ophub"
+        default: "wjtyyds"
         type: choice
         options:
-          - ophub
-          - angel
-          - yourname
+          - wjtyyds
 
 env:
   TZ: Etc/UTC
@@ -231,7 +224,7 @@ jobs:
           echo "status=success" >> ${GITHUB_OUTPUT}
 
       - name: Package OpenWrt Firmware
-        uses: ophub/flippy-openwrt-actions@main
+        uses: wjtyyds/flippy-openwrt-actions@dev
         if: ${{ steps.download.outputs.status }} == 'success' && !cancelled()
         env:
           OPENWRT_ARMSR: download/*rootfs.tar.gz
@@ -266,6 +259,6 @@ jobs:
             - Login to OpenWrt → System → Amlogic Service → Install OpenWrt
             ### OpenWrt source code
             - [coolsnowwolf/lede](https://github.com/coolsnowwolf/lede)
-            - The OpenWrt [rootfs and kernel](https://github.com/ophub/flippy-openwrt-actions/releases/tag/OpenWrt_armv8_rootfs) files are both shared by [flippy](https://github.com/unifreq/openwrt_packit).
+            - The OpenWrt [rootfs and kernel](https://github.com/wjtyyds/flippy-openwrt-actions/releases/tag/OpenWrt_armv8_rootfs) files are both shared by [flippy](https://github.com/unifreq/openwrt_packit).
             ### OpenWrt Image Verification
             - sha256sum
