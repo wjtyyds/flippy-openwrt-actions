@@ -462,11 +462,10 @@ download_kernel() {
 
             # Download the kernel to the storage directory
             i="1"
-            ${vb} = "stable"
             for kernel_var in "${down_kernel_list[@]}"; do
                 if [[ ! -d "${kernel_path}/${kernel_var}" ]]; then
-                    kernel_down_from="https://github.com/${KERNEL_REPO_URL}/releases/download/kernel_${vb}/${kernel_var}.tar.gz"
-                    echo -e "${INFO} (${x}.${i}) [ ${vb} - ${kernel_var} ] Kernel download from [ ${kernel_down_from} ]"
+                    kernel_down_from="https://github.com/${KERNEL_REPO_URL}/releases/download/kernel_stable/${kernel_var}.tar.gz"
+                    echo -e "${INFO} (${x}.${i}) [ stable - ${kernel_var} ] Kernel download from [ ${kernel_down_from} ]"
 
                     # Download the kernel file. If the download fails, try again 10 times.
                     for t in {1..10}; do
@@ -479,7 +478,7 @@ download_kernel() {
                     tar -mxf "${kernel_path}/${kernel_var}.tar.gz" -C "${kernel_path}"
                     [[ "${?}" -eq "0" ]] || error_msg "[ ${kernel_var} ] kernel decompression failed."
                 else
-                    echo -e "${INFO} (${x}.${i}) [ ${vb} - ${kernel_var} ] Kernel is in the local directory."
+                    echo -e "${INFO} (${x}.${i}) [ stable - ${kernel_var} ] Kernel is in the local directory."
                 fi
 
                 # If the kernel contains the sha256sums file, check the files integrity
